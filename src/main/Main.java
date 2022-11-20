@@ -2,17 +2,22 @@ package main;
 
 import checker.Checker;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.Input;
+import models.Tournament;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -67,9 +72,13 @@ public final class Main {
         Input inputData = objectMapper.readValue(new File(CheckerConstants.TESTS_PATH + filePath1),
                 Input.class);
 
-        ArrayNode output = objectMapper.createArrayNode();
+        Tournament tournament = new Tournament(inputData);
 
-        //TODO add here the entry point to your implementation
+        ArrayNode output = objectMapper.createArrayNode();
+        ArrayList<JsonNode> results = tournament.play();
+        for(JsonNode result : results) {
+            output.add(result);
+        }
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);
