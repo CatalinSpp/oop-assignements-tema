@@ -1,14 +1,14 @@
 package models;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import fileio.CardInput;
-import fileio.DecksInput;
-import fileio.GameInput;
-import fileio.Input;
+import fileio.*;
 import models.cards.Card;
+import models.cards.heroes.Hero;
 import services.CardsFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class Tournament {
 
@@ -26,7 +26,7 @@ public class Tournament {
     public ArrayList<JsonNode> play() {
         ArrayList<JsonNode> results = new ArrayList<>();
         for (GameInput gameInput : gameInputs) {
-            Game game = new Game(playerOneDeck, playerTwoDeck, playerOneHero, playerTwoHero, startingPlayer);
+            Game game = parseGame(gameInput);
             ArrayList<JsonNode> gameResult = game.play();
             results.addAll(gameResult);
         }
@@ -35,7 +35,22 @@ public class Tournament {
 
     private Game parseGame(GameInput gameInput) {
         Deck playerOneDeck = playerOneDecks.get(gameInput.getStartGame().getPlayerOneDeckIdx()).clone();
+        Deck playerTwoDeck = playerTwoDecks.get(gameInput.getStartGame().getPlayerTwoDeckIdx()).clone();
+        Hero playerOneHero = (Hero) CardsFactory.createCard(gameInput.getStartGame().getPlayerOneHero());
+        Hero playerTwoHero = (Hero) CardsFactory.createCard(gameInput.getStartGame().getPlayerTwoHero());
 
+        shuffleCards(playerOneDeck, gameInput.getStartGame().getShuffleSeed());
+        shuffleCards(playerTwoDeck, gameInput.getStartGame().getShuffleSeed());
+
+        int startingPlayer = gameInput.getStartGame().getStartingPlayer();
+
+        return new Game(playerOneDeck, playerTwoDeck, playerOneHero, playerTwoHero, startingPlayer,
+                gameInput.getActions());
+    }
+
+    private void shuffleCards(Deck deck, long shuffleSeed) {
+        Random random = new Random(shuffleSeed);
+        Collections.shuffle(deck.getCards(), random);
     }
 
     private ArrayList<Deck> parseDeckInput(DecksInput decksInput) {

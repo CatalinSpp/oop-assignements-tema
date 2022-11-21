@@ -7,4 +7,9 @@ public abstract class SpecialMinion extends Minion {
     public SpecialMinion(CardInput cardInput) {
         super(cardInput);
     }
+
+    public SpecialMinion(SpecialMinion specialMinion) {
+        super(specialMinion);
+    }
+
 }

@@ -1,0 +1,28 @@
+[ null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, null, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, null, null, null, null, null, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, null, null, null, null, null, null, null, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, null, null, null, null, null, null, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, null, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  "command" : "getPlayerTurn",
+  "output" : 1
+}, null, null, null, null, null, null, null, null, null, null ]

@@ -10,6 +10,11 @@ public abstract class Character extends Card {
         this.health = cardInput.getHealth();
     }
 
+    public Character(Character character) {
+        super(character);
+        this.health = character.getHealth();
+    }
+
     public int getHealth() {
         return health;
     }

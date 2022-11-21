@@ -8,4 +8,9 @@ public abstract class Hero extends Character {
         super(cardInput);
         this.health = 30;
     }
+    public Hero(Hero hero) {
+        super(hero);
+        this.health = 30;
+    }
+
 }

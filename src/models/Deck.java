@@ -1,6 +1,8 @@
 package models;
 
 import models.cards.Card;
+import services.CardsFactory;
+
 import java.util.ArrayList;
 
 public class Deck {
@@ -22,9 +24,12 @@ public class Deck {
     public Deck clone() {
         ArrayList<Card> cardsClones = new ArrayList<>();
         for(Card card : cards) {
-            cardsClones.add(card.clone());
+            cardsClones.add(CardsFactory.cloneCard(card));
         }
         return new Deck(cardsClones);
     }
 
+    public Card draw() {
+        return cards.remove(0);
+    }
 }
