@@ -1,104 +1,106 @@
 package models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import fileio.ActionsInput;
+import models.actions.PlaceCardAction;
 import models.cards.Card;
+import models.cards.Character;
+import models.cards.env.Environment;
 import models.cards.heroes.Hero;
 
-import java.util.ArrayList;
-
 public class Game {
+    private Player playerOne;
+    private Player playerTwo;
+    private int currentPlayerIdx;
 
-    private final Deck playerOneDeck;
-    private final Deck playerTwoDeck;
-    private final Hero playerOneHero;
-    private final Hero playerTwoHero;
-    private final int startingPlayer;
-    private final ArrayList<ActionsInput> actions;
+    private int startingPlayer;
+    private int currentRound = 1;
+    private final static int MAX_MANA_TO_ADD = 10;
+    private final Board board = new Board();
 
-    private int currentPlayer;
-
-    private ArrayList<Card> playerOneHand = new ArrayList<>();
-    private ArrayList<Card> playerTwoHand = new ArrayList<>();
-
-    public Game(Deck playerOneDeck, Deck playerTwoDeck, Hero playerOneHero, Hero playerTwoHero, int startingPlayer, ArrayList<ActionsInput> actions) {
-        this.playerOneDeck = playerOneDeck;
-        this.playerTwoDeck = playerTwoDeck;
-        this.playerOneHero = playerOneHero;
-        this.playerTwoHero = playerTwoHero;
+    public Game(Deck playerOneDeck, Deck playerTwoDeck, Hero playerOneHero, Hero playerTwoHero, int startingPlayer) {
+        this.playerOne = new Player(playerOneDeck, playerOneHero);
+        this.playerTwo = new Player(playerTwoDeck, playerTwoHero);
         this.startingPlayer = startingPlayer;
-        this.actions = actions;
+        this.currentPlayerIdx = startingPlayer;
 
-        initializeGame();
+        startNextRound();
     }
 
-    private void initializeGame() {
-        currentPlayer = startingPlayer;
-        playerOneHand.add(playerOneDeck.draw());
-        playerTwoHand.add(playerTwoDeck.draw());
+    public Player getPlayerOne() {
+        return playerOne;
     }
 
-    public ArrayList<JsonNode> play() {
-        ArrayList<JsonNode> results = new ArrayList<>();
-        for (ActionsInput action : actions) {
-            JsonNode result = doAction(action);
-            results.add(result);
+    public Player getPlayerTwo() {
+        return playerTwo;
+    }
+
+    public int getCurrentPlayerIdx() {
+        return currentPlayerIdx;
+    }
+
+    public int getCurrentRound() {
+        return currentRound;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    private void startNextRound() {
+        playerOne.draw();
+        playerTwo.draw();
+
+        playerOne.addMana(Math.min(currentRound, MAX_MANA_TO_ADD));
+        playerTwo.addMana(Math.min(currentRound, MAX_MANA_TO_ADD));
+
+        // System.out.println("Round started");
+    }
+
+    private void endRound() {
+        currentRound++;
+        // System.out.println("Round ended");
+    }
+
+    public void endPlayerTurn() {
+        // System.out.println("Player " + currentPlayerIdx + " turn ended");
+
+        currentPlayerIdx = 3 - currentPlayerIdx;
+        if(currentPlayerIdx == startingPlayer) {
+            endRound();
+            startNextRound();
         }
-        return results;
     }
 
-    private JsonNode doAction(ActionsInput action) {
-        switch (action.getCommand()) {
-            case "getPlayerDeck":
-                return getPlayerDeck(action);
-            case "getPlayerHero":
-                return getPlayerHero(action);
-            case "getPlayerTurn":
-                return getPlayerTurn(action);
-        }
-
-        return null;
-    }
-
-    private JsonNode getPlayerDeck(ActionsInput action) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode objectNode = objectMapper.createObjectNode();
-        objectNode.put("command", action.getCommand());
-        objectNode.put("playerIdx", action.getPlayerIdx());
-
-        if (action.getPlayerIdx() == 1) {
-            objectNode.put("output", objectMapper.valueToTree(playerOneDeck.getCards()));
+    private Player getCurrentPlayer() {
+        if(currentPlayerIdx == 1) {
+            return playerOne;
         } else {
-            objectNode.put("output", objectMapper.valueToTree(playerTwoDeck.getCards()));
+            return playerTwo;
         }
-
-        return objectNode;
     }
 
-    private JsonNode getPlayerHero(ActionsInput action) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode objectNode = objectMapper.createObjectNode();
-        objectNode.put("command", action.getCommand());
-        objectNode.put("playerIdx", action.getPlayerIdx());
+    public PlaceCardAction.PlaceCardResult placeCard(int handIdx) {
+        Card card = getCurrentPlayer().peekCard(handIdx);
 
-        if (action.getPlayerIdx() == 1) {
-            objectNode.put("output", objectMapper.valueToTree(playerOneHero));
-        } else {
-            objectNode.put("output", objectMapper.valueToTree(playerTwoHero));
+        if(card == null) {
+            return PlaceCardAction.PlaceCardResult.CARD_IS_ENV;
         }
 
-        return objectNode;
-    }
+        if(card instanceof Environment) {
+            return PlaceCardAction.PlaceCardResult.CARD_IS_ENV;
+        }
+        Character character = (Character) card;
 
-    private JsonNode getPlayerTurn(ActionsInput action) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode objectNode = objectMapper.createObjectNode();
-        objectNode.put("command", action.getCommand());
-        objectNode.put("output", currentPlayer);
+        if(getCurrentPlayer().getMana() < card.getMana()) {
+            return PlaceCardAction.PlaceCardResult.NOT_ENOUGH_MANA;
+        }
+        if(!board.isRoom(character.getPlaceOnBoard(), currentPlayerIdx)) {
+            return PlaceCardAction.PlaceCardResult.ROW_IS_FULL;
+        }
 
-        return objectNode;
+        Card cardToPlay = getCurrentPlayer().getCardToPlay(handIdx);
+        board.playCard(cardToPlay, character.getPlaceOnBoard(), currentPlayerIdx);
+
+        return PlaceCardAction.PlaceCardResult.OK;
     }
 
 }

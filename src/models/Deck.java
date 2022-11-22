@@ -30,6 +30,10 @@ public class Deck {
     }
 
     public Card draw() {
-        return cards.remove(0);
+        if(cards.size() >= 1) {
+            return cards.remove(0);
+        } else {
+            return null;
+        }
     }
 }

@@ -26,8 +26,10 @@ public class Tournament {
     public ArrayList<JsonNode> play() {
         ArrayList<JsonNode> results = new ArrayList<>();
         for (GameInput gameInput : gameInputs) {
+            // System.out.println("Starting a new game\n\n");
             Game game = parseGame(gameInput);
-            ArrayList<JsonNode> gameResult = game.play();
+            GameProcessor gameProcessor = new GameProcessor(game, gameInput.getActions());
+            ArrayList<JsonNode> gameResult = gameProcessor.play();
             results.addAll(gameResult);
         }
         return results;
@@ -44,8 +46,7 @@ public class Tournament {
 
         int startingPlayer = gameInput.getStartGame().getStartingPlayer();
 
-        return new Game(playerOneDeck, playerTwoDeck, playerOneHero, playerTwoHero, startingPlayer,
-                gameInput.getActions());
+        return new Game(playerOneDeck, playerTwoDeck, playerOneHero, playerTwoHero, startingPlayer);
     }
 
     private void shuffleCards(Deck deck, long shuffleSeed) {

@@ -1,6 +1,7 @@
 package models.cards;
 
 import fileio.CardInput;
+import models.Board;
 
 public abstract class Character extends Card {
     protected int health;
@@ -22,4 +23,6 @@ public abstract class Character extends Card {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public abstract Board.RowType getPlaceOnBoard();
 }

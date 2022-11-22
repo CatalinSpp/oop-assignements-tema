@@ -1,9 +1,11 @@
 package models.cards;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import fileio.CardInput;
 
 import java.util.ArrayList;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE)
 public abstract class Card {
     protected String name;
     protected String description;

@@ -1,6 +1,7 @@
 package models.cards.minions;
 
 import fileio.CardInput;
+import models.Board;
 
 public class Berserker extends Minion {
 
@@ -8,8 +9,15 @@ public class Berserker extends Minion {
         super(cardInput);
     }
 
+    @Override
+    public Board.RowType getPlaceOnBoard() {
+        return Board.RowType.BACK_ROW;
+    }
+
     public Berserker(Berserker berserker) {
         super(berserker);
     }
+
+
 
 }

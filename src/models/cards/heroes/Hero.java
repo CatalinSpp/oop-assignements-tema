@@ -1,5 +1,6 @@
 package models.cards.heroes;
 
+import models.Board;
 import models.cards.Character;
 import fileio.CardInput;
 
@@ -13,4 +14,8 @@ public abstract class Hero extends Character {
         this.health = 30;
     }
 
+    @Override
+    public Board.RowType getPlaceOnBoard() {
+        return Board.RowType.OUTSIDE;
+    }
 }

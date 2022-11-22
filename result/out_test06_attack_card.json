@@ -1,11 +1,72 @@
-[ null, null, null, null, null, null, null, null, null, {
+[ {
+  "command" : "getCardsInHand",
+  "playerIdx" : 1,
+  "output" : [ {
+    "name" : "Berserker",
+    "description" : "Premium card: Fear him. Your last breath is now.",
+    "mana" : 2,
+    "colors" : [ "Purple", "Yellow" ],
+    "health" : 1,
+    "attackDamage" : 2
+  }, {
+    "name" : "Warden",
+    "description" : "Premium card: You shall not pass, you shall not prevail, you shall perish.",
+    "mana" : 2,
+    "colors" : [ "Black", "White", "Green" ],
+    "health" : 6,
+    "attackDamage" : 3
+  } ]
+}, {
+  "command" : "getPlayerMana",
+  "playerIdx" : 1,
+  "output" : 4
+}, {
   "command" : "getPlayerTurn",
   "output" : 1
-}, null, null, null, null, null, null, null, null, {
+}, {
+  "command" : "getPlayerMana",
+  "playerIdx" : 2,
+  "output" : 4
+}, {
+  "command" : "getPlayerMana",
+  "playerIdx" : 1,
+  "output" : 0
+}, {
   "command" : "getPlayerTurn",
-  "output" : 1
-}, null, null, null, {
-  "command" : "getPlayerDeck",
+  "output" : 2
+}, {
+  "command" : "getCardsOnTable",
+  "output" : [ [ ], [ {
+    "name" : "Warden",
+    "description" : "Standard card: He has seen everything, his mind has never been asleep since the making of the realm.",
+    "mana" : 2,
+    "colors" : [ "Black", "White", "Green" ],
+    "health" : 6,
+    "attackDamage" : 2
+  } ], [ {
+    "name" : "Warden",
+    "description" : "Premium card: You shall not pass, you shall not prevail, you shall perish.",
+    "mana" : 2,
+    "colors" : [ "Black", "White", "Green" ],
+    "health" : 6,
+    "attackDamage" : 3
+  } ], [ {
+    "name" : "The Cursed One",
+    "description" : "Premium card: Nobody suspects an outcast, not even the Gods.",
+    "mana" : 2,
+    "colors" : [ "Black", "White", "Red" ],
+    "health" : 3,
+    "attackDamage" : 0
+  }, {
+    "name" : "Berserker",
+    "description" : "Premium card: Fear him. Your last breath is now.",
+    "mana" : 2,
+    "colors" : [ "Purple", "Yellow" ],
+    "health" : 1,
+    "attackDamage" : 2
+  } ] ]
+}, {
+  "command" : "getCardsInHand",
   "playerIdx" : 2,
   "output" : [ {
     "name" : "Heart Hound",
@@ -19,7 +80,15 @@
     "colors" : [ "Brown", "Black", "Grey" ],
     "health" : 8,
     "attackDamage" : 2
-  }, {
+  } ]
+}, {
+  "command" : "getCardsInHand",
+  "playerIdx" : 1,
+  "output" : [ ]
+}, {
+  "command" : "getPlayerDeck",
+  "playerIdx" : 2,
+  "output" : [ {
     "name" : "Sentinel",
     "description" : "Standard card: Trained by the best, nothing will catch him off-guard.",
     "mana" : 1,
@@ -52,20 +121,6 @@
   "command" : "getPlayerDeck",
   "playerIdx" : 1,
   "output" : [ {
-    "name" : "The Cursed One",
-    "description" : "Premium card: Nobody suspects an outcast, not even the Gods.",
-    "mana" : 2,
-    "colors" : [ "Black", "White", "Red" ],
-    "health" : 3,
-    "attackDamage" : 0
-  }, {
-    "name" : "Warden",
-    "description" : "Premium card: You shall not pass, you shall not prevail, you shall perish.",
-    "mana" : 2,
-    "colors" : [ "Black", "White", "Green" ],
-    "health" : 6,
-    "attackDamage" : 3
-  }, {
     "name" : "Firestorm",
     "description" : "Standard card: The dragon was unleashed, run for your lives.",
     "mana" : 1,
