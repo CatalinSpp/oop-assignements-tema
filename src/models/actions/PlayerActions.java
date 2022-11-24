@@ -6,7 +6,7 @@ public abstract class PlayerActions extends Action {
 
     protected int playerIdx;
 
-    public PlayerActions(String command, int playerIdx) {
+    public PlayerActions(final String command, final int playerIdx) {
         super(command);
         this.playerIdx = playerIdx;
     }

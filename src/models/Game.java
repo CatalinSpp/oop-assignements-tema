@@ -13,10 +13,12 @@ public class Game {
 
     private int startingPlayer;
     private int currentRound = 1;
-    private final static int MAX_MANA_TO_ADD = 10;
+    private static final int MAX_MANA_TO_ADD = 10;
+    public static final int TURN_NUMBER = 3;
     private final Board board = new Board();
 
-    public Game(Deck playerOneDeck, Deck playerTwoDeck, Hero playerOneHero, Hero playerTwoHero, int startingPlayer) {
+    public Game(final Deck playerOneDeck, final Deck playerTwoDeck,
+                final Hero playerOneHero, final Hero playerTwoHero, final int startingPlayer) {
         this.playerOne = new Player(playerOneDeck, playerOneHero);
         this.playerTwo = new Player(playerTwoDeck, playerTwoHero);
         this.startingPlayer = startingPlayer;
@@ -25,23 +27,23 @@ public class Game {
         startNextRound();
     }
 
-    public Player getPlayerOne() {
+    public final Player getPlayerOne() {
         return playerOne;
     }
 
-    public Player getPlayerTwo() {
+    public final Player getPlayerTwo() {
         return playerTwo;
     }
 
-    public int getCurrentPlayerIdx() {
+    public final int getCurrentPlayerIdx() {
         return currentPlayerIdx;
     }
 
-    public int getCurrentRound() {
+    public final int getCurrentRound() {
         return currentRound;
     }
 
-    public Board getBoard() {
+    public final Board getBoard() {
         return board;
     }
 
@@ -60,40 +62,40 @@ public class Game {
         // System.out.println("Round ended");
     }
 
-    public void endPlayerTurn() {
+    public final void endPlayerTurn() {
         // System.out.println("Player " + currentPlayerIdx + " turn ended");
 
-        currentPlayerIdx = 3 - currentPlayerIdx;
-        if(currentPlayerIdx == startingPlayer) {
+        currentPlayerIdx = TURN_NUMBER - currentPlayerIdx;
+        if (currentPlayerIdx == startingPlayer) {
             endRound();
             startNextRound();
         }
     }
 
     private Player getCurrentPlayer() {
-        if(currentPlayerIdx == 1) {
+        if (currentPlayerIdx == 1) {
             return playerOne;
         } else {
             return playerTwo;
         }
     }
 
-    public PlaceCardAction.PlaceCardResult placeCard(int handIdx) {
+    public final PlaceCardAction.PlaceCardResult placeCard(final int handIdx) {
         Card card = getCurrentPlayer().peekCard(handIdx);
 
-        if(card == null) {
+        if (card == null) {
             return PlaceCardAction.PlaceCardResult.CARD_IS_ENV;
         }
 
-        if(card instanceof Environment) {
+        if (card instanceof Environment) {
             return PlaceCardAction.PlaceCardResult.CARD_IS_ENV;
         }
         Character character = (Character) card;
 
-        if(getCurrentPlayer().getMana() < card.getMana()) {
+        if (getCurrentPlayer().getMana() < card.getMana()) {
             return PlaceCardAction.PlaceCardResult.NOT_ENOUGH_MANA;
         }
-        if(!board.isRoom(character.getPlaceOnBoard(), currentPlayerIdx)) {
+        if (!board.isRoom(character.getPlaceOnBoard(), currentPlayerIdx)) {
             return PlaceCardAction.PlaceCardResult.ROW_IS_FULL;
         }
 

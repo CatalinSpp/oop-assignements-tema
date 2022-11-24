@@ -3,14 +3,14 @@ package models.actions;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Game;
 
-public class EndPlayerTurnAction extends Action{
+public class EndPlayerTurnAction extends Action {
 
-    public EndPlayerTurnAction(String command) {
+    public EndPlayerTurnAction(final String command) {
         super(command);
     }
 
     @Override
-    public JsonNode doAction(Game game) {
+    public final JsonNode doAction(final Game game) {
         game.endPlayerTurn();
         return null;
     }

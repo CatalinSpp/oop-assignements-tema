@@ -5,17 +5,18 @@ import models.cards.Character;
 import fileio.CardInput;
 
 public abstract class Hero extends Character {
-    public Hero(CardInput cardInput) {
+    public static final int MAX_HERO_HEALTH = 30;
+    public Hero(final CardInput cardInput) {
         super(cardInput);
-        this.health = 30;
+        this.health = MAX_HERO_HEALTH;
     }
-    public Hero(Hero hero) {
+    public Hero(final Hero hero) {
         super(hero);
-        this.health = 30;
+        this.health = MAX_HERO_HEALTH;
     }
 
     @Override
-    public Board.RowType getPlaceOnBoard() {
+    public final Board.RowType getPlaceOnBoard() {
         return Board.RowType.OUTSIDE;
     }
 }

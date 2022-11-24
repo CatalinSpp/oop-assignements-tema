@@ -17,13 +17,13 @@ public class Tournament {
     private ArrayList<GameInput> gameInputs;
 
 
-    public Tournament(Input input) {
+    public Tournament(final Input input) {
         playerOneDecks = parseDeckInput(input.getPlayerOneDecks());
         playerTwoDecks = parseDeckInput(input.getPlayerTwoDecks());
         gameInputs = input.getGames();
     }
 
-    public ArrayList<JsonNode> play() {
+    public final ArrayList<JsonNode> play() {
         ArrayList<JsonNode> results = new ArrayList<>();
         for (GameInput gameInput : gameInputs) {
             // System.out.println("Starting a new game\n\n");
@@ -35,11 +35,15 @@ public class Tournament {
         return results;
     }
 
-    private Game parseGame(GameInput gameInput) {
-        Deck playerOneDeck = playerOneDecks.get(gameInput.getStartGame().getPlayerOneDeckIdx()).clone();
-        Deck playerTwoDeck = playerTwoDecks.get(gameInput.getStartGame().getPlayerTwoDeckIdx()).clone();
-        Hero playerOneHero = (Hero) CardsFactory.createCard(gameInput.getStartGame().getPlayerOneHero());
-        Hero playerTwoHero = (Hero) CardsFactory.createCard(gameInput.getStartGame().getPlayerTwoHero());
+    private Game parseGame(final GameInput gameInput) {
+        Deck playerOneDeck =
+                playerOneDecks.get(gameInput.getStartGame().getPlayerOneDeckIdx()).clone();
+        Deck playerTwoDeck =
+                playerTwoDecks.get(gameInput.getStartGame().getPlayerTwoDeckIdx()).clone();
+        Hero playerOneHero =
+                (Hero) CardsFactory.createCard(gameInput.getStartGame().getPlayerOneHero());
+        Hero playerTwoHero = (
+                Hero) CardsFactory.createCard(gameInput.getStartGame().getPlayerTwoHero());
 
         shuffleCards(playerOneDeck, gameInput.getStartGame().getShuffleSeed());
         shuffleCards(playerTwoDeck, gameInput.getStartGame().getShuffleSeed());
@@ -49,12 +53,12 @@ public class Tournament {
         return new Game(playerOneDeck, playerTwoDeck, playerOneHero, playerTwoHero, startingPlayer);
     }
 
-    private void shuffleCards(Deck deck, long shuffleSeed) {
+    private void shuffleCards(final Deck deck, final long shuffleSeed) {
         Random random = new Random(shuffleSeed);
         Collections.shuffle(deck.getCards(), random);
     }
 
-    private ArrayList<Deck> parseDeckInput(DecksInput decksInput) {
+    private ArrayList<Deck> parseDeckInput(final DecksInput decksInput) {
         ArrayList<Deck> result = new ArrayList<>();
         for (ArrayList<CardInput> deckInput : decksInput.getDecks()) {
             ArrayList<Card> cards = new ArrayList<>();

@@ -9,28 +9,28 @@ public class Deck {
 
     private ArrayList<Card> cards;
 
-    public Deck(ArrayList<Card> cards) {
+    public Deck(final ArrayList<Card> cards) {
         this.cards = cards;
     }
 
-    public ArrayList<Card> getCards() {
+    public final ArrayList<Card> getCards() {
         return cards;
     }
 
-    public void setCards(ArrayList<Card> cards) {
+    public final void setCards(final ArrayList<Card> cards) {
         this.cards = cards;
     }
 
-    public Deck clone() {
+    public final Deck clone() {
         ArrayList<Card> cardsClones = new ArrayList<>();
-        for(Card card : cards) {
+        for (Card card : cards) {
             cardsClones.add(CardsFactory.cloneCard(card));
         }
         return new Deck(cardsClones);
     }
 
-    public Card draw() {
-        if(cards.size() >= 1) {
+    public final Card draw() {
+        if (cards.size() >= 1) {
             return cards.remove(0);
         } else {
             return null;

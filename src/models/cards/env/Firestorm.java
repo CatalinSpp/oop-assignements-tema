@@ -3,11 +3,11 @@ package models.cards.env;
 import fileio.CardInput;
 
 public class Firestorm extends Environment {
-    public Firestorm(CardInput cardInput) {
+    public Firestorm(final CardInput cardInput) {
         super(cardInput);
     }
 
-    public Firestorm(Firestorm firestorm) {
+    public Firestorm(final Firestorm firestorm) {
         super(firestorm);
     }
 

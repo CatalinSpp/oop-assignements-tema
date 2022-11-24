@@ -76,7 +76,7 @@ public final class Main {
 
         ArrayNode output = objectMapper.createArrayNode();
         ArrayList<JsonNode> results = tournament.play();
-        for(JsonNode result : results) {
+        for (JsonNode result : results) {
             output.add(result);
         }
 

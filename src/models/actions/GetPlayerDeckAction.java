@@ -7,18 +7,20 @@ import models.Game;
 
 public class GetPlayerDeckAction extends PlayerActions {
 
-    public GetPlayerDeckAction(String command, int playerIdx) {
+    public GetPlayerDeckAction(final String command, final int playerIdx) {
         super(command, playerIdx);
     }
 
     @Override
-    public JsonNode doAction(Game game) {
+    public final JsonNode doAction(final Game game) {
         ObjectNode node = initializeNode();
 
         if (playerIdx == 1) {
-            node.put("output", new ObjectMapper().valueToTree(game.getPlayerOne().getDeck().getCards()));
+            node.put("output",
+                    new ObjectMapper().valueToTree(game.getPlayerOne().getDeck().getCards()));
         } else {
-            node.put("output", new ObjectMapper().valueToTree(game.getPlayerTwo().getDeck().getCards()));
+            node.put("output",
+                    new ObjectMapper().valueToTree(game.getPlayerTwo().getDeck().getCards()));
         }
 
         return node;

@@ -3,10 +3,10 @@ package models.cards.heroes;
 import fileio.CardInput;
 
 public class GeneralKocioraw extends Hero {
-    public GeneralKocioraw(CardInput cardInput) {
+    public GeneralKocioraw(final CardInput cardInput) {
         super(cardInput);
     }
-    public GeneralKocioraw(GeneralKocioraw generalKocioraw) {
+    public GeneralKocioraw(final GeneralKocioraw generalKocioraw) {
         super(generalKocioraw);
     }
 }

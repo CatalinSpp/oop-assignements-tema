@@ -6,12 +6,12 @@ import models.Game;
 
 public class GetPlayerTurnAction extends Action {
 
-    public GetPlayerTurnAction(String command) {
+    public GetPlayerTurnAction(final String command) {
         super(command);
     }
 
     @Override
-    public JsonNode doAction(Game game) {
+    public final JsonNode doAction(final Game game) {
         ObjectNode node = initializeNode();
         node.put("output", game.getCurrentPlayerIdx());
         return node;

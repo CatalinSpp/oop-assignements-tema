@@ -8,11 +8,11 @@ import models.Game;
 public abstract class Action {
     protected String command;
 
-    public Action(String command) {
+    public Action(final String command) {
         this.command = command;
     }
 
-    public String getCommand() {
+    public final String getCommand() {
         return command;
     }
 
@@ -22,6 +22,5 @@ public abstract class Action {
         objectNode.put("command", command);
         return objectNode;
     }
-
     public abstract JsonNode doAction(Game game);
 }

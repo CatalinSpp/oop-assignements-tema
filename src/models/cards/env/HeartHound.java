@@ -3,11 +3,11 @@ package models.cards.env;
 import fileio.CardInput;
 
 public class HeartHound extends Environment {
-    public HeartHound(CardInput cardInput) {
+    public HeartHound(final CardInput cardInput) {
         super(cardInput);
     }
 
-    public HeartHound(HeartHound heartHound) {
+    public HeartHound(final HeartHound heartHound) {
         super(heartHound);
     }
 

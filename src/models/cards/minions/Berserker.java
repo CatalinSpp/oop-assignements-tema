@@ -5,19 +5,18 @@ import models.Board;
 
 public class Berserker extends Minion {
 
-    public Berserker(CardInput cardInput) {
+    public Berserker(final CardInput cardInput) {
         super(cardInput);
     }
 
     @Override
-    public Board.RowType getPlaceOnBoard() {
+    public final Board.RowType getPlaceOnBoard() {
         return Board.RowType.BACK_ROW;
     }
 
-    public Berserker(Berserker berserker) {
+    public Berserker(final Berserker berserker) {
         super(berserker);
     }
-
 
 
 }

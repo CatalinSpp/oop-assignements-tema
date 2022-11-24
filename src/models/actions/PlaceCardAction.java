@@ -4,20 +4,20 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Game;
 
-public class PlaceCardAction extends Action{
+public class PlaceCardAction extends Action {
 
     private final int handIdx;
 
-    public PlaceCardAction(String command, int handIdx) {
+    public PlaceCardAction(final String command, final int handIdx) {
         super(command);
         this.handIdx = handIdx;
     }
 
     @Override
-    public JsonNode doAction(Game game) {
+    public final JsonNode doAction(final Game game) {
 
         PlaceCardResult result = game.placeCard(handIdx);
-        if(result == PlaceCardResult.OK) {
+        if (result == PlaceCardResult.OK) {
             return null;
         }
 
@@ -41,7 +41,7 @@ public class PlaceCardAction extends Action{
         return node;
     }
 
-    public static enum PlaceCardResult {
+    public enum PlaceCardResult {
         OK,
         CARD_IS_ENV,
         NOT_ENOUGH_MANA,

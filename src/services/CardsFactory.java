@@ -8,11 +8,11 @@ import models.cards.heroes.EmpressThorina;
 import models.cards.heroes.GeneralKocioraw;
 import models.cards.heroes.KingMudface;
 import models.cards.heroes.LordRoyce;
-import models.cards.minions.*;
 import fileio.CardInput;
+import models.cards.minions.*;
 
 public class CardsFactory {
-    public static Card createCard(CardInput cardInput) {
+    public static Card createCard(final CardInput cardInput) {
 
         switch (cardInput.getName()) {
             case "Sentinel":
@@ -45,12 +45,13 @@ public class CardsFactory {
                 return new KingMudface(cardInput);
             case "General Kocioraw":
                 return new GeneralKocioraw(cardInput);
+            default:
         }
 
         return null;
     }
 
-    public static Card cloneCard(Card card) {
+    public static Card cloneCard(final Card card) {
 
         switch (card.getName()) {
             case "Sentinel":
@@ -83,9 +84,9 @@ public class CardsFactory {
                 return new KingMudface((KingMudface) card);
             case "General Kocioraw":
                 return new GeneralKocioraw((GeneralKocioraw) card);
+            default:
         }
 
         return null;
     }
-    
 }

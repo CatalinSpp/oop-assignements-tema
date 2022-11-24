@@ -4,11 +4,11 @@ import models.cards.Card;
 import fileio.CardInput;
 
 public abstract class Environment extends Card {
-    public Environment(CardInput cardInput) {
+    public Environment(final CardInput cardInput) {
         super(cardInput);
     }
 
-    public Environment(Environment environment) {
+    public Environment(final Environment environment) {
         super(environment);
     }
 

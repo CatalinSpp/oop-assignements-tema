@@ -7,24 +7,26 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
+    public static final int MAX_CARDS_ON_ROW = 5;
 
-    public ArrayList<Card> playTwoBackRow = new ArrayList<>();
-    public ArrayList<Card> playerTwoFrontRow = new ArrayList<>();
-    public ArrayList<Card> playerOneFrontRow = new ArrayList<>();
-    public ArrayList<Card> playerOneBackRow = new ArrayList<>();
+    private ArrayList<Card> playTwoBackRow = new ArrayList<>();
+    private ArrayList<Card> playerTwoFrontRow = new ArrayList<>();
+    private ArrayList<Card> playerOneFrontRow = new ArrayList<>();
+    private ArrayList<Card> playerOneBackRow = new ArrayList<>();
 
-    public List<ArrayList<Card>> getCardsOnTable() {
-        return  Arrays.asList(playTwoBackRow, playerTwoFrontRow, playerOneFrontRow, playerOneBackRow);
+    public final List<ArrayList<Card>> getCardsOnTable() {
+        return  Arrays.asList(playTwoBackRow,
+                playerTwoFrontRow, playerOneFrontRow, playerOneBackRow);
     }
-    public boolean isRoom(RowType rowType, int currentPlayerIdx) {
+    public final boolean isRoom(final RowType rowType, final int currentPlayerIdx) {
         ArrayList<Card> row = getRow(rowType, currentPlayerIdx);
-        if (row.size() >= 5) {
+        if (row.size() >= MAX_CARDS_ON_ROW) {
             return false;
         }
         return true;
     }
 
-    public ArrayList<Card> getRow(RowType rowType, int currentPlayerIdx) {
+    public final ArrayList<Card> getRow(final RowType rowType, final int currentPlayerIdx) {
         if (currentPlayerIdx == 1) {
             if (rowType == rowType.BACK_ROW) {
                 return playerOneBackRow;
@@ -40,7 +42,7 @@ public class Board {
         }
     }
 
-    public void playCard(Card card, RowType rowType, int currentPlayerIdx) {
+    public final void playCard(final Card card, final RowType rowType, final int currentPlayerIdx) {
         ArrayList<Card> row = getRow(rowType, currentPlayerIdx);
         row.add(card);
     }

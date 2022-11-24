@@ -4,16 +4,16 @@ import fileio.CardInput;
 import models.Board;
 
 public class Miraj extends SpecialMinion {
-    public Miraj(CardInput cardInput) {
+    public Miraj(final CardInput cardInput) {
         super(cardInput);
     }
 
-    public Miraj(Miraj miraj) {
+    public Miraj(final Miraj miraj) {
         super(miraj);
     }
 
     @Override
-    public Board.RowType getPlaceOnBoard() {
+    public final Board.RowType getPlaceOnBoard() {
         return Board.RowType.FRONT_ROW;
     }
 }

@@ -11,47 +11,47 @@ public class Player {
     private int mana = 0;
     private ArrayList<Card> hand = new ArrayList<>();
 
-    public Player(Deck deck, Hero hero) {
+    public Player(final Deck deck, final Hero hero) {
         this.deck = deck;
         this.hero = hero;
     }
 
-    public Deck getDeck() {
+    public final Deck getDeck() {
         return deck;
     }
 
-    public Hero getHero() {
+    public final Hero getHero() {
         return hero;
     }
 
-    public int getMana() {
+    public final int getMana() {
         return mana;
     }
 
-    public ArrayList<Card> getHand() {
+    public final ArrayList<Card> getHand() {
         return hand;
     }
 
-    public void draw() {
+    public final void draw() {
         Card card = deck.draw();
-        if(card != null) {
+        if (card != null) {
             hand.add(card);
         }
     }
 
-    public void addMana(int mana) {
+    public final void addMana(final int mana) {
         this.mana += mana;
     }
 
-    public Card peekCard(int handIdx) {
-        if(handIdx >= hand.size()) {
+    public final Card peekCard(final int handIdx) {
+        if (handIdx >= hand.size()) {
             return null;
         }
 
         return hand.get(handIdx);
     }
 
-    public Card getCardToPlay(int handIdx) {
+    public final Card getCardToPlay(final int handIdx) {
         Card card = hand.remove(handIdx);
         mana -= card.getMana();
         return card;

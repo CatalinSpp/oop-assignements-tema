@@ -4,16 +4,16 @@ import fileio.CardInput;
 import models.Board;
 
 public class Sentinel extends Minion {
-    public Sentinel(CardInput cardInput) {
+    public Sentinel(final CardInput cardInput) {
         super(cardInput);
     }
 
-    public Sentinel(Sentinel sentinel) {
+    public Sentinel(final Sentinel sentinel) {
         super(sentinel);
     }
 
     @Override
-    public Board.RowType getPlaceOnBoard() {
+    public final Board.RowType getPlaceOnBoard() {
         return Board.RowType.BACK_ROW;
     }
 }

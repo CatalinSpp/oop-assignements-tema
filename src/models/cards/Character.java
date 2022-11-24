@@ -6,21 +6,21 @@ import models.Board;
 public abstract class Character extends Card {
     protected int health;
 
-    public Character(CardInput cardInput) {
+    public Character(final CardInput cardInput) {
         super(cardInput);
         this.health = cardInput.getHealth();
     }
 
-    public Character(Character character) {
+    public Character(final Character character) {
         super(character);
         this.health = character.getHealth();
     }
 
-    public int getHealth() {
+    public final int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public final void setHealth(final int health) {
         this.health = health;
     }
 

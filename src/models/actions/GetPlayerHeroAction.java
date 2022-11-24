@@ -7,12 +7,12 @@ import models.Game;
 
 public class GetPlayerHeroAction extends PlayerActions {
 
-    public GetPlayerHeroAction(String command, int playerIdx) {
+    public GetPlayerHeroAction(final String command, final int playerIdx) {
         super(command, playerIdx);
     }
 
     @Override
-    public JsonNode doAction(Game game) {
+    public final JsonNode doAction(final Game game) {
         ObjectNode node = initializeNode();
 
         if (playerIdx == 1) {

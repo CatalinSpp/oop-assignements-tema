@@ -5,7 +5,7 @@ import models.actions.*;
 
 public class ActionFactory {
 
-    public static Action createAction(ActionsInput action) {
+    public static Action createAction(final ActionsInput action) {
         switch (action.getCommand()) {
             case "getPlayerDeck":
                 return new GetPlayerDeckAction(action.getCommand(), action.getPlayerIdx());
@@ -23,6 +23,7 @@ public class ActionFactory {
                 return new GetPlayerManaAction(action.getCommand(), action.getPlayerIdx());
             case "getCardsOnTable":
                 return new GetCardsOnTableAction(action.getCommand());
+            default:
         }
 
         return null;

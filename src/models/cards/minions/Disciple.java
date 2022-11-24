@@ -4,16 +4,16 @@ import fileio.CardInput;
 import models.Board;
 
 public class Disciple extends SpecialMinion {
-    public Disciple(CardInput cardInput) {
+    public Disciple(final CardInput cardInput) {
         super(cardInput);
     }
 
     @Override
-    public Board.RowType getPlaceOnBoard() {
+    public final Board.RowType getPlaceOnBoard() {
         return Board.RowType.BACK_ROW;
     }
 
-    public Disciple(Disciple disciple) {
+    public Disciple(final Disciple disciple) {
         super(disciple);
     }
 

@@ -3,11 +3,11 @@ package models.cards.heroes;
 import fileio.CardInput;
 
 public class EmpressThorina extends Hero {
-    public EmpressThorina(CardInput cardInput) {
+    public EmpressThorina(final CardInput cardInput) {
         super(cardInput);
     }
 
-    public EmpressThorina(EmpressThorina empressThorina) {
+    public EmpressThorina(final EmpressThorina empressThorina) {
         super(empressThorina);
     }
 

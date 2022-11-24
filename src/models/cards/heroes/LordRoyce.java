@@ -3,10 +3,10 @@ package models.cards.heroes;
 import fileio.CardInput;
 
 public class LordRoyce extends Hero {
-    public LordRoyce(CardInput cardInput) {
+    public LordRoyce(final CardInput cardInput) {
         super(cardInput);
     }
-    public LordRoyce(LordRoyce lordRoyce) {
+    public LordRoyce(final LordRoyce lordRoyce) {
         super(lordRoyce);
     }
 }
